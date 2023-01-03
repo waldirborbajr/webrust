@@ -14,6 +14,15 @@ RUN cargo chef cook --release --recipe-path recipe.json
 
 # stage 3
 FROM rust as builder
+ENV USER=webrust
+ENV UID=1001
+RUN adduser \
+  --disabled-password \
+  --gecos "" \
+  --home "/nonexistent" \
+  --no-create-home \
+  --uid "${UID}" \
+  "${USER}"
 COPY . /app
 WORKDIR /app
 COPY --from=cacher /app/target target
