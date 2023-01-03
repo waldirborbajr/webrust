@@ -35,4 +35,5 @@ COPY --from=builder /etc/passwd /etc/passwd
 COPY --from=builder /etc/group /etc/group
 COPY --from=builder /app/target/release/webrust /app/webrust
 WORKDIR /app
+USER webrust:webrust
 CMD ["./webrust"]
