@@ -31,6 +31,8 @@ RUN cargo build --release
 
 # stage 4
 FROM gcr.io/distroless/cc-debian11
+COPY --from=builder /etc/passwd /etc/passwd
+COPY --from=builder /etc/group /etc/group
 COPY --from=builder /app/target/release/webrust /app/webrust
 WORKDIR /app
 CMD ["./webrust"]
